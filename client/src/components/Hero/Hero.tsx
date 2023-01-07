@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
+import ModalComponent from "../Modal/Modal";
 
 const HeroComponent = styled.header`
   padding: 5rem 0;
@@ -35,6 +36,7 @@ export default function Hero() {
         <SubHeading>
           Grow, learn, and become more successful by reading some of the top article by highly reputable individuals
         </SubHeading>
+        <ModalComponent />
       </HeaderContainer>
     </Container>
   </HeroComponent>;
