@@ -20,6 +20,11 @@ const Heading = styled.h1`
   font-size: 5rem;
 `
 
+const SubHeading = styled.h3`
+  margin: 1rem 0;
+  font-weight: 400;
+`
+
 export default function Hero() {
   return <HeroComponent>
     <Container>
@@ -27,6 +32,9 @@ export default function Hero() {
         <Heading>
           Feed your mine with the best
         </Heading>
+        <SubHeading>
+          Grow, learn, and become more successful by reading some of the top article by highly reputable individuals
+        </SubHeading>
       </HeaderContainer>
     </Container>
   </HeroComponent>;
