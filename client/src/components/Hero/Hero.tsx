@@ -14,14 +14,15 @@ const HeaderContainer = styled.div`
   background-color: rgb(5 , 148, 112);
   padding: 3rem;
   color: white;
-  width: 32.5rem;
+  width: 26.5rem;
 `;
 
 const Heading = styled.h1`
-  font-size: 5rem;
+  font-size: 3rem;
 `
 
 const SubHeading = styled.h3`
+  font-size: 1.5rem;
   margin: 1rem 0;
   font-weight: 400;
 `
@@ -31,7 +32,7 @@ export default function Hero() {
     <Container>
       <HeaderContainer>
         <Heading>
-          Feed your mine with the best
+          Feed your mind with the best
         </Heading>
         <SubHeading>
           Grow, learn, and become more successful by reading some of the top article by highly reputable individuals
