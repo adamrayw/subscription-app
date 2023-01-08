@@ -11,7 +11,7 @@ export default function ModalComponent() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" onClick={handleShow}  size="lg">
         Launch demo modal
       </Button>
 
