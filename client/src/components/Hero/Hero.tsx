@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Container } from "react-bootstrap";
+import { Container, Stack } from "react-bootstrap";
 import ModalComponent from "../Modal/Modal";
 
 const HeroComponent = styled.header`
@@ -37,7 +37,10 @@ export default function Hero() {
         <SubHeading>
           Grow, learn, and become more successful by reading some of the top article by highly reputable individuals
         </SubHeading>
-        <ModalComponent />
+        <Stack direction="horizontal" gap={3}>
+          <ModalComponent text="Login" variant="primary"/>
+          <ModalComponent text="Signup" variant="secondary"/>
+        </Stack>
       </HeaderContainer>
     </Container>
   </HeroComponent>;
