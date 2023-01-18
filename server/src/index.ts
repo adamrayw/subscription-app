@@ -1,16 +1,34 @@
-import express from 'express';
-import authRoutes from "./routes/auth"
+import express from "express";
+import authRoutes from "./routes/auth";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-const app = express();
+dotenv.config();
 
-app.get('/', (req, res) => {
-    res.status(200).json({
-        "message": "Hello World!"
-    })
-})
+mongoose.set("strictQuery", false);
 
-app.use('/auth', authRoutes)
+mongoose
+  .connect(process.env.MONGO_URI as string)
+  .then(() => {
 
-app.listen(8080, () => {
-    console.log('Server listening...')
-})
+    const app = express();
+    
+    app.use(express.json());
+
+    app.get("/", (req, res) => {
+      res.status(200).json({
+        message: "Hello World!",
+      });
+    });
+
+    app.use("/auth", authRoutes);
+    app.listen(8080, () => {
+      console.log("Server listening...");
+    });
+    console.log("Connected to mongodb");
+
+  })
+  .catch((error) => {
+    console.log(error)
+    throw new Error();
+  });
