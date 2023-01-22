@@ -26,7 +26,7 @@ router.post(
         return { msg: e.msg };
       });
 
-      return res.status(400).json({ errors, data: null });
+      return res.json({ errors, data: null });
     }
 
     const { email, password } = req.body;
@@ -34,7 +34,7 @@ router.post(
     const user = await User.findOne({ email });
 
     if (user) {
-      return res.status(400).send({
+      return res.send({
         errors: [
           {
             msg: "Email already in use",
@@ -86,18 +86,25 @@ router.post("/login", async (req, res) => {
           id: findUser._id,
         },
         token,
+        errors: []
       });
     } else {
-      res.status(400).json({
-        error: {
-          msg: "invalid credentials",
-        }
+      res.json({
+        errors: [
+          {
+            msg: "invalid credentials",
+          }
+        ]
       });
     }
 
   } else {
-    res.status(400).json({
-      msg: "User with that email not found!",
+    res.json({
+      errors: [
+        {
+        msg: "User with that email not found!",
+      }
+      ]
     });
   }
 });
