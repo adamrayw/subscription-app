@@ -38,8 +38,8 @@ export default function Hero() {
           Grow, learn, and become more successful by reading some of the top article by highly reputable individuals
         </SubHeading>
         <Stack direction="horizontal" gap={3}>
-          <ModalComponent text="Login" variant="primary"/>
-          <ModalComponent text="Signup" variant="secondary"/>
+          <ModalComponent text="Login" variant="primary" isSignUpFlow={false} />
+          <ModalComponent text="Signup" variant="secondary" isSignUpFlow={true}/>
         </Stack>
       </HeaderContainer>
     </Container>
