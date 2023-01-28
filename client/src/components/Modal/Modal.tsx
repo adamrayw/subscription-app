@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context";
 
 interface ModalProps {
   text: string;
@@ -31,8 +32,10 @@ export default function ModalComponent({
 
   const navigate = useNavigate();
 
+  const [state, setState] = useContext(UserContext);
+
   const handleClick = async () => {
-    let data;
+    let response;
     if (isSignUpFlow) {
       const { data: signUpData } = await axios.post(
         "http://localhost:8080/auth/signup",
@@ -41,7 +44,7 @@ export default function ModalComponent({
           password,
         }
       );
-      data = signUpData;
+      response = signUpData;
     } else {
       const { data: loginData } = await axios.post(
         "http://localhost:8080/auth/login",
@@ -51,14 +54,24 @@ export default function ModalComponent({
         }
       );
 
-      data = loginData;
+      response = loginData;
     }
 
-    if (data.errors.length) {
-      return setErrorMsg(data.errors[0].msg);
+    if (response.errors.length) {
+      return setErrorMsg(response.errors[0].msg);
     }
 
-    localStorage.setItem("token", data.token);
+    setState({
+      data: {
+        id: response.user.id,
+        email: response.user.email,
+      },
+      loading: false,
+      error: null,
+    });
+
+    localStorage.setItem("token", response.token);
+    axios.defaults.headers.common["authorization"] = `Bearer ${response.token}`;
     navigate("/article");
   };
 
