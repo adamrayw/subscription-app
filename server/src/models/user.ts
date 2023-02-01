@@ -12,6 +12,10 @@ const userSchema = new Schema({
         type: String,
         required: true,
         min: 5,
+    },
+    customerStripeId: {
+        type: String,
+        required: true
     }
 })
 

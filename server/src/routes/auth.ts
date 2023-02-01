@@ -4,6 +4,7 @@ import User from "../models/user";
 import bcrypt from "bcrypt";
 import JWT from "jsonwebtoken";
 import { checkAuth } from "../middleware/checkAuth";
+import { stripe } from "../utils/stripe"
 
 const router = express.Router();
 
@@ -50,17 +51,25 @@ router.post(
 
       const token = generateToken(email);
 
+      const customer = await stripe.customers.create({
+        email
+      }, {
+        apiKey: process.env.STRIPE_SECRET_KEY
+      })
+
       const createUser = await User.create({
         email,
         password: hashed_process,
+        customerStripeId: customer.id
       });
 
       return res.status(200).json({
         success: [
           {
             user: {
-              email: createUser.email,
               id: createUser._id,
+              email: createUser.email,
+              stripeCustomerId: customer.id
             },
             token,
           },
@@ -120,6 +129,7 @@ router.get('/me', checkAuth, async (req, res) => {
       user: {
         id: user._id,
         email: user.email,
+        stripeCustomerId: user.stripeCustomerId
       }
     }
   })
