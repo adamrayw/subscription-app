@@ -65,6 +65,7 @@ export default function ModalComponent({
       data: {
         id: response.user.id,
         email: response.user.email,
+        customerStripeId: response.user.customerStripeId,
       },
       loading: false,
       error: null,
