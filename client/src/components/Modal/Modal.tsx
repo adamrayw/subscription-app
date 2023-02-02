@@ -32,6 +32,7 @@ export default function ModalComponent({
 
   const navigate = useNavigate();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [state, setState] = useContext(UserContext);
 
   const handleClick = async () => {
