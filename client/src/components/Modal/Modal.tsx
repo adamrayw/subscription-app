@@ -73,7 +73,7 @@ export default function ModalComponent({
 
     localStorage.setItem("token", response.token);
     axios.defaults.headers.common["authorization"] = `Bearer ${response.token}`;
-    navigate("/article");
+    navigate("/articles");
   };
 
   return (
